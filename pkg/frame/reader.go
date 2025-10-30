@@ -11,7 +11,11 @@ import (
 )
 
 const (
-	bufferSize = 512 // frames cannot go beyond len(header) + 255 + len(check) + len(sig)
+	// bufferSize is the size of the internal buffer used to read from the underlying reader.
+	// This buffer can contain multiple MAVLink messages that have been packed into a single UDP packet.
+	// The size is set to 65535 bytes since the maximum size of a UDP packet is 65507 bytes,
+	// and this allows the reader to handle multiple MAVLink messages efficiently.
+	bufferSize = 65535
 )
 
 // 1st January 2015 GMT
